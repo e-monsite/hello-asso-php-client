@@ -1,4 +1,4 @@
-# Body
+# Authorization
 
 ## Properties
 Name | Type | Description | Notes

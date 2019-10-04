@@ -1,4 +1,4 @@
-# V5apiorganizationsorganizationSlugformseventsactionquickcreateTiers
+# OrganizationEventTiers
 
 ## Properties
 Name | Type | Description | Notes

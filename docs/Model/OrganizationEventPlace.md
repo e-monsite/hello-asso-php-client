@@ -1,4 +1,4 @@
-# V5apiorganizationsorganizationSlugformseventsactionquickcreatePlace
+# OrganizationEventPlace
 
 ## Properties
 Name | Type | Description | Notes

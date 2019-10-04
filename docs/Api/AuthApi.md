@@ -4,10 +4,10 @@ All URIs are relative to *https://api.helloasso-rc.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**oauth2TokenPost**](AuthApi.md#oauth2tokenpost) | **POST** /oauth2/token | Authorization request
+[**auhtorize**](AuthApi.md#auhtorize) | **POST** /oauth2/token | Authorization request
 
-# **oauth2TokenPost**
-> \HelloAsso\Api\Model\AuthorizationResponse oauth2TokenPost($client_id, $client_secret, $grant_type, $refresh_token, $user_email, $user_first_name, $user_last_name, $organization_name, $organization_address, $organization_zipcode, $organization_city, $organization_phone, $organization_type, $organization_website)
+# **auhtorize**
+> \HelloAsso\Api\Model\AuthorizationResponse auhtorize($client_id, $client_secret, $grant_type, $refresh_token, $user_email, $user_first_name, $user_last_name, $organization_name, $organization_address, $organization_zipcode, $organization_city, $organization_phone, $organization_type, $organization_website)
 
 Authorization request
 
@@ -39,10 +39,10 @@ $organization_type = "organization_type_example"; // string |
 $organization_website = "organization_website_example"; // string | 
 
 try {
-    $result = $apiInstance->oauth2TokenPost($client_id, $client_secret, $grant_type, $refresh_token, $user_email, $user_first_name, $user_last_name, $organization_name, $organization_address, $organization_zipcode, $organization_city, $organization_phone, $organization_type, $organization_website);
+    $result = $apiInstance->auhtorize($client_id, $client_secret, $grant_type, $refresh_token, $user_email, $user_first_name, $user_last_name, $organization_name, $organization_address, $organization_zipcode, $organization_city, $organization_phone, $organization_type, $organization_website);
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling AuthApi->oauth2TokenPost: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling AuthApi->auhtorize: ', $e->getMessage(), PHP_EOL;
 }
 ?>
 ```
