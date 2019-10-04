@@ -46,5 +46,9 @@ rm git_push.sh
 # Replace readme file main title
 sed -i 's/\# SwaggerClient-php/\# Hello Asso PHP Client/g' README.md
 
+# Replace readme wrong autoload path
+sed -i 's/\/path\/to\/SwaggerClient-php\/vendor\/autoload\.php/\/path\/to\/hello-asso-php-client\/vendor\/autoload\.php/g' README.md
+
+
 # Replace readme file authorization text
 sed -i 's/\#\# Documentation For Authorization/\#\# Documentation For Authorization\n\nOAuth 2 JWT token with custom grant type/g' README.md
