@@ -42,3 +42,9 @@ rm generated.zip
 
 # No use of git_push script, clean it
 rm git_push.sh
+
+# Replace readme file main title
+sed -i 's/\# SwaggerClient-php/\# Hello Asso PHP Client/g' README.md
+
+# Replace readme file authorization text
+sed -i 's/\#\# Documentation For Authorization/\#\# Documentation For Authorization\n\nOAuth 2 JWT token with custom grant type/g' README.md
