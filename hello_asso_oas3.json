@@ -22,85 +22,7 @@
           "content": {
             "application/x-www-form-urlencoded": {
               "schema": {
-                "required": [
-                  "client_id",
-                  "secret",
-                  "grant_type"
-                ],
-                "properties": {
-                  "client_id": {
-                    "type": "string",
-                    "description": "Your Client Id"
-                  },
-                  "client_secret": {
-                    "type": "string",
-                    "description": "Your client Secret"
-                  },
-                  "grant_type": {
-                    "type": "string",
-                    "description": "organization_pre_signup",
-                    "enum": [
-                      "organization_pre_signup",
-                      "refresh_token"
-                    ]
-                  },
-                  "refresh_token": {
-                    "type": "string",
-                    "description": "The refresh token issued to the client in case of refresh_token grant_type"
-                  },
-                  "user_email": {
-                    "type": "string",
-                    "description": "The organization administrator email, a confirmation email will be sent to this email to finalize the subscription"
-                  },
-                  "user_first_name": {
-                    "type": "string"
-                  },
-                  "user_last_name": {
-                    "type": "string"
-                  },
-                  "organization_name": {
-                    "type": "string",
-                    "description": "The organization name will be used to create the URL on Helloasso.com"
-                  },
-                  "organization_address": {
-                    "type": "string"
-                  },
-                  "organization_zipcode": {
-                    "type": "string"
-                  },
-                  "organization_city": {
-                    "type": "string"
-                  },
-                  "organization_phone": {
-                    "type": "string"
-                  },
-                  "organization_type": {
-                    "type": "string",
-                    "enum": [
-                      "Association1901Rig",
-                      "Association1901Rup",
-                      "Association1901",
-                      "FondationRup",
-                      "FondDotation",
-                      "FondationSousEgide",
-                      "FondationScientifique",
-                      "FondationPartenariale",
-                      "FondationUniversitaire",
-                      "FondationHospitaliere",
-                      "Association1905",
-                      "Association1905Rup",
-                      "Entreprise",
-                      "Cooperative",
-                      "Etablissement",
-                      "Association1908",
-                      "Association1908Rig",
-                      "Association1908Rup"
-                    ]
-                  },
-                  "organization_website": {
-                    "type": "string"
-                  }
-                }
+                "$ref": "#/components/schemas/Authorization"
               }
             }
           }
@@ -141,8 +63,9 @@
     },
     "/v5/api/values/form/event/types": {
       "get": {
+        "operationId": "getEventTypes",
         "tags": [
-          "Public"
+          "Organizations"
         ],
         "description": "Organization event preset types",
         "responses": {
@@ -156,12 +79,17 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "apiBearer": []
+          }
+        ]
       }
     },
     "/v5/api/organizations/{organization_slug}/forms/events/action/quick-create": {
       "post": {
-        "operationId": "createOrganizationEvent",
+        "operationId": "createEvent",
         "tags": [
           "Organizations"
         ],
@@ -181,98 +109,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "required": [
-                  "title",
-                  "type",
-                  "tiers"
-                ],
-                "properties": {
-                  "title": {
-                    "type": "string",
-                    "description": "The event name, it will be used to create the slug"
-                  },
-                  "type": {
-                    "type": "string",
-                    "description": "Free text to describe the type of event. `/api/values/form/event/types` can be used for preset types"
-                  },
-                  "description": {
-                    "type": "string",
-                    "description": "A free text to describe the event"
-                  },
-                  "place": {
-                    "type": "object",
-                    "description": "Place object",
-                    "properties": {
-                      "name": {
-                        "type": "string",
-                        "description": "Name of the place of the event"
-                      },
-                      "address": {
-                        "type": "string",
-                        "description": "Address of the event"
-                      },
-                      "zipCode": {
-                        "type": "string"
-                      },
-                      "city": {
-                        "type": "string"
-                      },
-                      "country": {
-                        "type": "string"
-                      }
-                    }
-                  },
-                  "startDate": {
-                    "type": "string",
-                    "format": "ISO 8601 date",
-                    "description": "If setting a date, for a one day event use, startDate and set endDate to null."
-                  },
-                  "endDate": {
-                    "type": "string",
-                    "format": "ISO 8601 date",
-                    "description": "If setting a date, for a one day event use, startDate and set endDate to null."
-                  },
-                  "saleEndDate": {
-                    "type": "string",
-                    "format": "ISO 8601 date"
-                  },
-                  "contact": {
-                    "type": "string"
-                  },
-                  "firstname": {
-                    "type": "string"
-                  },
-                  "lastname": {
-                    "type": "string"
-                  },
-                  "email": {
-                    "type": "string"
-                  },
-                  "phone": {
-                    "type": "string"
-                  },
-                  "tiers": {
-                    "type": "array",
-                    "description": "List of tiers “Tarifs”. Required at least one",
-                    "items": {
-                      "type": "object",
-                      "minItems": 1,
-                      "required": [
-                        "label",
-                        "Price"
-                      ],
-                      "properties": {
-                        "label": {
-                          "type": "string"
-                        },
-                        "Price": {
-                          "type": "number",
-                          "description": "Price of the tier, in cents of euros : 1050 => 10.50 €. 0 means Free"
-                        }
-                      }
-                    }
-                  }
-                }
+                "$ref": "#/components/schemas/OrganizationEvent"
               }
             }
           }
@@ -322,7 +159,7 @@
         "tags": [
           "Public"
         ],
-        "description": "Retrieve organization campagins using v3 API",
+        "description": "Retrieve organization campaigns using v3 API",
         "parameters": [
           {
             "name": "organization_slug",
@@ -392,6 +229,181 @@
     "schemas": {
       "OrganizationEventTypesResponse": {
         "type": "object"
+      },
+      "OrganizationEvent": {
+        "required": [
+          "title",
+          "type",
+          "tiers"
+        ],
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "The event name, it will be used to create the slug"
+          },
+          "type": {
+            "type": "string",
+            "description": "Free text to describe the type of event. `/api/values/form/event/types` can be used for preset types"
+          },
+          "description": {
+            "type": "string",
+            "description": "A free text to describe the event"
+          },
+          "place": {
+            "type": "object",
+            "description": "Place object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Name of the place of the event"
+              },
+              "address": {
+                "type": "string",
+                "description": "Address of the event"
+              },
+              "zipCode": {
+                "type": "string"
+              },
+              "city": {
+                "type": "string"
+              },
+              "country": {
+                "type": "string"
+              }
+            }
+          },
+          "startDate": {
+            "type": "string",
+            "format": "ISO 8601 date",
+            "description": "If setting a date, for a one day event use, startDate and set endDate to null."
+          },
+          "endDate": {
+            "type": "string",
+            "format": "ISO 8601 date",
+            "description": "If setting a date, for a one day event use, startDate and set endDate to null."
+          },
+          "saleEndDate": {
+            "type": "string",
+            "format": "ISO 8601 date"
+          },
+          "contact": {
+            "type": "string"
+          },
+          "firstname": {
+            "type": "string"
+          },
+          "lastname": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "tiers": {
+            "type": "array",
+            "description": "List of tiers “Tarifs”. Required at least one",
+            "items": {
+              "type": "object",
+              "minItems": 1,
+              "required": [
+                "label",
+                "Price"
+              ],
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "Price": {
+                  "type": "number",
+                  "description": "Price of the tier, in cents of euros : 1050 => 10.50 €. 0 means Free"
+                }
+              }
+            }
+          }
+        }
+      },
+      "Authorization": {
+        "required": [
+          "client_id",
+          "secret",
+          "grant_type"
+        ],
+        "properties": {
+          "client_id": {
+            "type": "string",
+            "description": "Your Client Id"
+          },
+          "client_secret": {
+            "type": "string",
+            "description": "Your client Secret"
+          },
+          "grant_type": {
+            "type": "string",
+            "description": "organization_pre_signup",
+            "enum": [
+              "organization_pre_signup",
+              "refresh_token"
+            ]
+          },
+          "refresh_token": {
+            "type": "string",
+            "description": "The refresh token issued to the client in case of refresh_token grant_type"
+          },
+          "user_email": {
+            "type": "string",
+            "description": "The organization administrator email, a confirmation email will be sent to this email to finalize the subscription"
+          },
+          "user_first_name": {
+            "type": "string"
+          },
+          "user_last_name": {
+            "type": "string"
+          },
+          "organization_name": {
+            "type": "string",
+            "description": "The organization name will be used to create the URL on Helloasso.com"
+          },
+          "organization_address": {
+            "type": "string"
+          },
+          "organization_zipcode": {
+            "type": "string"
+          },
+          "organization_city": {
+            "type": "string"
+          },
+          "organization_phone": {
+            "type": "string"
+          },
+          "organization_type": {
+            "type": "string",
+            "enum": [
+              "Association1901Rig",
+              "Association1901Rup",
+              "Association1901",
+              "FondationRup",
+              "FondDotation",
+              "FondationSousEgide",
+              "FondationScientifique",
+              "FondationPartenariale",
+              "FondationUniversitaire",
+              "FondationHospitaliere",
+              "Association1905",
+              "Association1905Rup",
+              "Entreprise",
+              "Cooperative",
+              "Etablissement",
+              "Association1908",
+              "Association1908Rig",
+              "Association1908Rup"
+            ]
+          },
+          "organization_website": {
+            "type": "string"
+          }
+        }
       },
       "AuthorizationResponse": {
         "required": [
