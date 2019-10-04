@@ -39,17 +39,7 @@
               }
             }
           },
-          "400": {
-            "description": "Credentials error response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
+          "default": {
             "description": "Credentials error response",
             "content": {
               "application/json": {
@@ -126,17 +116,7 @@
               }
             }
           },
-          "400": {
-            "description": "Credentials error response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
+          "default": {
             "description": "Credentials error response",
             "content": {
               "application/json": {
@@ -232,6 +212,7 @@
         "type": "object"
       },
       "OrganizationEvent": {
+        "type": "object",
         "required": [
           "title",
           "type",
@@ -326,6 +307,7 @@
         }
       },
       "Authorization": {
+        "type": "object",
         "required": [
           "client_id",
           "secret",
@@ -407,6 +389,7 @@
         }
       },
       "AuthorizationResponse": {
+        "type": "object",
         "required": [
           "access_token",
           "token_type",
@@ -437,6 +420,7 @@
         }
       },
       "NewOrganizationEventResponse": {
+        "type": "object",
         "required": [
           "formSlug",
           "organizationSlug",
@@ -458,6 +442,7 @@
         }
       },
       "OrganizationCampaignsResponse": {
+        "type": "object",
         "properties": {
           "resources": {
             "type": "array",
@@ -505,6 +490,7 @@
         }
       },
       "ErrorResponse": {
+        "type": "object",
         "required": [
           "error",
           "error_description"
