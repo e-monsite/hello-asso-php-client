@@ -39,8 +39,18 @@
               }
             }
           },
-          "default": {
+          "400": {
             "description": "Credentials error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
             "content": {
               "application/json": {
                 "schema": {
@@ -116,8 +126,18 @@
               }
             }
           },
-          "default": {
+          "400": {
             "description": "Credentials error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
             "content": {
               "application/json": {
                 "schema": {
