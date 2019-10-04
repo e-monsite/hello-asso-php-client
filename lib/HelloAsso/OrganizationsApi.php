@@ -171,6 +171,14 @@ class OrganizationsApi
                     );
                     $e->setResponseObject($data);
                     break;
+                case 400:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\HelloAsso\Api\Model\ErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
                 case 0:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
