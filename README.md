@@ -36,7 +36,7 @@ Then run `composer install`
 Download the files and include `autoload.php`:
 
 ```php
-    require_once('/path/to/SwaggerClient-php/vendor/autoload.php');
+    require_once('/path/to/hello-asso-php-client/vendor/autoload.php');
 ```
 
 ## Tests
