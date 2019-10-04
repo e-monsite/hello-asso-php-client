@@ -1,0 +1,516 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Hello Asso",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://api.helloasso-rc.com"
+    }
+  ],
+  "paths": {
+    "/oauth2/token": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Authorization request",
+        "description": "Refresh token or register a new organization and get access token",
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "required": [
+                  "client_id",
+                  "secret",
+                  "grant_type"
+                ],
+                "properties": {
+                  "client_id": {
+                    "type": "string",
+                    "description": "Your Client Id"
+                  },
+                  "client_secret": {
+                    "type": "string",
+                    "description": "Your client Secret"
+                  },
+                  "grant_type": {
+                    "type": "string",
+                    "description": "organization_pre_signup",
+                    "enum": [
+                      "organization_pre_signup",
+                      "refresh_token"
+                    ]
+                  },
+                  "refresh_token": {
+                    "type": "string",
+                    "description": "The refresh token issued to the client in case of refresh_token grant_type"
+                  },
+                  "user_email": {
+                    "type": "string",
+                    "description": "The organization administrator email, a confirmation email will be sent to this email to finalize the subscription"
+                  },
+                  "user_first_name": {
+                    "type": "string"
+                  },
+                  "user_last_name": {
+                    "type": "string"
+                  },
+                  "organization_name": {
+                    "type": "string",
+                    "description": "The organization name will be used to create the URL on Helloasso.com"
+                  },
+                  "organization_address": {
+                    "type": "string"
+                  },
+                  "organization_zipcode": {
+                    "type": "string"
+                  },
+                  "organization_city": {
+                    "type": "string"
+                  },
+                  "organization_phone": {
+                    "type": "string"
+                  },
+                  "organization_type": {
+                    "type": "string",
+                    "enum": [
+                      "Association1901Rig",
+                      "Association1901Rup",
+                      "Association1901",
+                      "FondationRup",
+                      "FondDotation",
+                      "FondationSousEgide",
+                      "FondationScientifique",
+                      "FondationPartenariale",
+                      "FondationUniversitaire",
+                      "FondationHospitaliere",
+                      "Association1905",
+                      "Association1905Rup",
+                      "Entreprise",
+                      "Cooperative",
+                      "Etablissement",
+                      "Association1908",
+                      "Association1908Rig",
+                      "Association1908Rup"
+                    ]
+                  },
+                  "organization_website": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Authorization response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthorizationResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Credentials error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Credentials error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v5/api/values/form/event/types": {
+      "get": {
+        "tags": [
+          "Public"
+        ],
+        "description": "Organization event preset types",
+        "responses": {
+          "200": {
+            "description": "Organization event types response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrganizationEventTypesResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v5/api/organizations/{organization_slug}/forms/events/action/quick-create": {
+      "post": {
+        "tags": [
+          "Organizations"
+        ],
+        "description": "Create a new organization event",
+        "parameters": [
+          {
+            "name": "organization_slug",
+            "in": "path",
+            "description": "Slug identifying the organization",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": [
+                  "title",
+                  "type",
+                  "tiers"
+                ],
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "description": "The event name, it will be used to create the slug"
+                  },
+                  "type": {
+                    "type": "string",
+                    "description": "Free text to describe the type of event. `/api/values/form/event/types` can be used for preset types"
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "A free text to describe the event"
+                  },
+                  "place": {
+                    "type": "object",
+                    "description": "Place object",
+                    "properties": {
+                      "name": {
+                        "type": "string",
+                        "description": "Name of the place of the event"
+                      },
+                      "address": {
+                        "type": "string",
+                        "description": "Address of the event"
+                      },
+                      "zipCode": {
+                        "type": "string"
+                      },
+                      "city": {
+                        "type": "string"
+                      },
+                      "country": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "startDate": {
+                    "type": "string",
+                    "format": "ISO 8601 date",
+                    "description": "If setting a date, for a one day event use, startDate and set endDate to null."
+                  },
+                  "endDate": {
+                    "type": "string",
+                    "format": "ISO 8601 date",
+                    "description": "If setting a date, for a one day event use, startDate and set endDate to null."
+                  },
+                  "saleEndDate": {
+                    "type": "string",
+                    "format": "ISO 8601 date"
+                  },
+                  "contact": {
+                    "type": "string"
+                  },
+                  "firstname": {
+                    "type": "string"
+                  },
+                  "lastname": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "phone": {
+                    "type": "string"
+                  },
+                  "tiers": {
+                    "type": "array",
+                    "description": "List of tiers “Tarifs”. Required at least one",
+                    "items": {
+                      "type": "object",
+                      "minItems": 1,
+                      "required": [
+                        "label",
+                        "Price"
+                      ],
+                      "properties": {
+                        "label": {
+                          "type": "string"
+                        },
+                        "Price": {
+                          "type": "number",
+                          "description": "Price of the tier, in cents of euros : 1050 => 10.50 €. 0 means Free"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "New organization event response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NewOrganizationEventResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Credentials error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Credentials error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "apiBearer": []
+          }
+        ]
+      }
+    },
+    "/v3/public/organizations/{organization_slug}/campaigns.json": {
+      "get": {
+        "tags": [
+          "Public"
+        ],
+        "description": "Retrieve organization campagins using v3 API",
+        "parameters": [
+          {
+            "name": "organization_slug",
+            "in": "path",
+            "description": "Slug identifying the organization",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "description": "Type filter",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "EVENT",
+                "FORM",
+                "FUNDRAISER",
+                "MEMBERSHIP"
+              ]
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page",
+            "required": false,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "results_per_page",
+            "in": "query",
+            "description": "Number of results per page",
+            "required": false,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Organization campaings response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrganizationCampaignsResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Orgnization not found"
+          },
+          "500": {
+            "description": "System error"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "OrganizationEventTypesResponse": {
+        "type": "object"
+      },
+      "AuthorizationResponse": {
+        "required": [
+          "access_token",
+          "token_type",
+          "expires_in",
+          "refresh_token"
+        ],
+        "properties": {
+          "access_token": {
+            "type": "string",
+            "description": "The JWT token to use in future requests"
+          },
+          "token_type": {
+            "type": "string",
+            "description": "Token type"
+          },
+          "expires_in": {
+            "type": "string",
+            "description": "Token expiration in seconds"
+          },
+          "refresh_token": {
+            "type": "string",
+            "description": "Token used to refresh the token and get a new JWT token after expiration"
+          },
+          "organization_slug": {
+            "type": "string",
+            "description": "Slug identifying the created organization"
+          }
+        }
+      },
+      "NewOrganizationEventResponse": {
+        "required": [
+          "formSlug",
+          "organizationSlug",
+          "url"
+        ],
+        "properties": {
+          "formSlug": {
+            "type": "string",
+            "description": "Identify the form"
+          },
+          "organizationSlug": {
+            "type": "string",
+            "description": "Identify the organization"
+          },
+          "url": {
+            "type": "string",
+            "description": "Public URL of the event. The event won’t be accessible until the admin has finished the organism subscription"
+          }
+        }
+      },
+      "OrganizationCampaignsResponse": {
+        "properties": {
+          "resources": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "slug": {
+                  "type": "string"
+                },
+                "url": {
+                  "type": "string"
+                },
+                "url_widget": {
+                  "type": "string"
+                },
+                "url_bouton": {
+                  "type": "string"
+                },
+                "name_organism": {
+                  "type": "string"
+                },
+                "slug_organism": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "pagination": {
+            "type": "object",
+            "properties": {
+              "page": {
+                "type": "number"
+              },
+              "max_page": {
+                "type": "number"
+              },
+              "results_pet_page": {
+                "type": "number"
+              }
+            }
+          }
+        }
+      },
+      "ErrorResponse": {
+        "required": [
+          "error",
+          "error_description"
+        ],
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "Error message"
+          },
+          "error_description": {
+            "type": "string",
+            "description": "Error description"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "apiBearer": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}
