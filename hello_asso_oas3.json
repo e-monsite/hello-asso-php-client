@@ -2,7 +2,8 @@
   "openapi": "3.0.1",
   "info": {
     "title": "Hello Asso",
-    "version": "1.0.0"
+    "version": "1.0.0",
+    "description": "www.helloasso.com Api specifications"
   },
   "servers": [
     {
