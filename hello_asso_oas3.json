@@ -12,6 +12,7 @@
   "paths": {
     "/oauth2/token": {
       "post": {
+        "operationId": "auhtorize",
         "tags": [
           "Auth"
         ],
@@ -160,6 +161,7 @@
     },
     "/v5/api/organizations/{organization_slug}/forms/events/action/quick-create": {
       "post": {
+        "operationId": "createOrganizationEvent",
         "tags": [
           "Organizations"
         ],
@@ -316,6 +318,7 @@
     },
     "/v3/public/organizations/{organization_slug}/campaigns.json": {
       "get": {
+        "operationId": "getOrganizationCampaigns",
         "tags": [
           "Public"
         ],
