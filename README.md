@@ -92,8 +92,8 @@ All URIs are relative to *https://api.helloasso-rc.com*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *AuthApi* | [**auhtorize**](docs/Api/AuthApi.md#auhtorize) | **POST** /oauth2/token | Authorization request
-*OrganizationsApi* | [**createEvent**](docs/Api/OrganizationsApi.md#createevent) | **POST** /v5/api/organizations/{organization_slug}/forms/events/action/quick-create | 
-*OrganizationsApi* | [**getEventTypes**](docs/Api/OrganizationsApi.md#geteventtypes) | **GET** /v5/api/values/form/event/types | 
+*OrganizationsApi* | [**createEvent**](docs/Api/OrganizationsApi.md#createevent) | **POST** /v5/organizations/{organization_slug}/forms/events/action/quick-create | 
+*OrganizationsApi* | [**getEventTypes**](docs/Api/OrganizationsApi.md#geteventtypes) | **GET** /v5/values/form/event/types | 
 *PublicApi* | [**getOrganizationCampaigns**](docs/Api/PublicApi.md#getorganizationcampaigns) | **GET** /v3/public/organizations/{organization_slug}/campaigns.json | 
 
 ## Documentation For Models

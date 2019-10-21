@@ -4,8 +4,8 @@ All URIs are relative to *https://api.helloasso-rc.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**createEvent**](OrganizationsApi.md#createevent) | **POST** /v5/api/organizations/{organization_slug}/forms/events/action/quick-create | 
-[**getEventTypes**](OrganizationsApi.md#geteventtypes) | **GET** /v5/api/values/form/event/types | 
+[**createEvent**](OrganizationsApi.md#createevent) | **POST** /v5/organizations/{organization_slug}/forms/events/action/quick-create | 
+[**getEventTypes**](OrganizationsApi.md#geteventtypes) | **GET** /v5/values/form/event/types | 
 
 # **createEvent**
 > \HelloAsso\Api\Model\NewOrganizationEventResponse createEvent($organization_slug, $body)
