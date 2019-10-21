@@ -62,7 +62,7 @@
         }
       }
     },
-    "/v5/api/values/form/event/types": {
+    "/v5/values/form/event/types": {
       "get": {
         "operationId": "getEventTypes",
         "tags": [
@@ -88,7 +88,7 @@
         ]
       }
     },
-    "/v5/api/organizations/{organization_slug}/forms/events/action/quick-create": {
+    "/v5/organizations/{organization_slug}/forms/events/action/quick-create": {
       "post": {
         "operationId": "createEvent",
         "tags": [
